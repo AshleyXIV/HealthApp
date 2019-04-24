@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "453139493770",
+    "firebase_url": "https://health-app-89a05.firebaseio.com",
+    "project_id": "health-app-89a05",
+    "storage_bucket": "health-app-89a05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453139493770:android:2381de976a2d1af9",
+        "android_client_info": {
+          "package_name": "cs.uga.edu.healthapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453139493770-a3nqh9ermp96c3vlrgch1003pg11v9r3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cs.uga.edu.healthapp",
+            "certificate_hash": "378920ab3f640de1ba09c21aa36e95cda49fc2f0"
+          }
+        },
+        {
+          "client_id": "453139493770-vh0tj71uv6cue1aubcldv84t9nts56di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzKSPtk_URpKP4Lcpd3BRxAGu3-bIPcPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453139493770-vh0tj71uv6cue1aubcldv84t9nts56di.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
