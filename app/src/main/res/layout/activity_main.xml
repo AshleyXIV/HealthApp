@@ -69,7 +69,6 @@
         android:textAllCaps="false"
         android:textColor="@color/colorText"
         android:textSize="20dp"
-
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewSignup"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +83,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:padding="15dp"
-        android:text="Don't have an account? Sign Up!"
+        android:text="@string/signUp"
         android:textAlignment="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorText"
