@@ -26,15 +26,22 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);   //set the toolbar as the action bar
-
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         //displays the home fragment right after activity is started
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        if (mAuth.getCurrentUser() == null) { //if user is NOT logged in
+            finish();   //finish current activity
+            startActivity(new Intent(this, MainActivity.class));    //go to login activity if not logged in
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

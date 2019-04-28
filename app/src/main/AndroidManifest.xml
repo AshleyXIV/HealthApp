@@ -12,7 +12,6 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".FirebaseUIActivity" />
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

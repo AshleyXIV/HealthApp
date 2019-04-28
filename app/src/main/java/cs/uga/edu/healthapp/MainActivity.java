@@ -45,14 +45,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
+        if(mAuth.getCurrentUser() != null){ //if user is already logged in
+            finish();   //finish current activity
+            startActivity(new Intent(this, HomeActivity.class));    //go to home if logged in
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.textViewSignup:
+                finish();
                 startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.buttonLogin:
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-
+                            finish();
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             //do this to clear all the activities on the top of the stack and will open the new activity;
                             // this will prevent the user from going back to the  login screen if they press back

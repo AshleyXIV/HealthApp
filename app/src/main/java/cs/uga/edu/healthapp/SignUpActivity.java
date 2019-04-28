@@ -69,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 registerUser();
                 break;
             case R.id.textViewLogin:
+                finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
         }
@@ -132,7 +133,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-
                             sendUserData(email, name, height, weight); //send the name, height, weight values to the database
                             mAuth.signOut();
                             Toast.makeText(SignUpActivity.this, "User Registration Successful!", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             finish();
-                            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             //do this to clear all the activities on the top of the stack and will open the new activity;
                             // this will prevent the user from going back to the  login screen if they press back
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -154,10 +154,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
-
                     }
                 });
-
     }   //registerUser
 
     /**
