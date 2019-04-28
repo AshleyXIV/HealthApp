@@ -30,7 +30,7 @@ import java.util.Objects;
 public class ProfileFragment extends Fragment {
 
     private TextView profileEmail, profileName, profileHeight, profileWeight, profileVerified;
-    private Button profileUpdate;
+    private Button profileUpdate, profileFriends;
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment {
         profileWeight = view.findViewById(R.id.textViewWeight);
         profileVerified = view.findViewById(R.id.textViewVerified);
         profileUpdate = view.findViewById(R.id.buttonProfileUpdate);
+        profileFriends = view.findViewById(R.id.buttonFriends);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -63,7 +64,7 @@ public class ProfileFragment extends Fragment {
             profileVerified.setText(content);
             profileVerified.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {   //if textview is clicked, send verification email
+                public void onClick(View v) {   //if textView is clicked, send verification email
                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
