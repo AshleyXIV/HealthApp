@@ -167,7 +167,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Log.d(TAG, "sendUserData:method called");
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         Log.d(TAG, "sendUserData:database instance called");
-        DatabaseReference myRef = firebaseDatabase.getReference(Objects.requireNonNull(mAuth.getUid()));    //retrieve the unique user ID from the authentication section
+        DatabaseReference myRef = firebaseDatabase.getReference().child("users").child(mAuth.getUid());    //retrieve the unique user ID from the authentication section
         Log.d(TAG, "sendUserData:get reference to database");
         User user = new User(email, name, height, weight);     //assign name/height/weight values to user instance
         Log.d(TAG, "sendUserData:user values assigned");

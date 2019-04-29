@@ -3,9 +3,11 @@ package cs.uga.edu.healthapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -27,6 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
@@ -35,6 +42,7 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,10 +57,15 @@ public class HomeFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = firebaseDatabase.getReference();
         final FirebaseUser user = mAuth.getCurrentUser();
 
+        //get date
+        LocalDate localDate = LocalDate.now();
+        final String currentDate = DateTimeFormatter.ofPattern("MM/dd/yyy").format(localDate);
+
         //reference the database with the specific user's unique id
-        DatabaseReference databaseReference = firebaseDatabase.getReference(mAuth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(mAuth.getUid());
         //event listener for referencing the database
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,6 +107,11 @@ public class HomeFragment extends Fragment {
                         String stepsInput = input.getText().toString();
                         btnSteps.setText("Steps Walked: " + stepsInput);
 
+                        Log.d(TAG, "onStepsClick: DATE = " + currentDate);
+                        Map<String, Map<String, String>> stepsData = new HashMap<String, Map<String, String>>();
+                        //stepsData.put("Date", currentDate, "Steps", stepsInput);
+
+                        myRef.child("users").child(mAuth.getUid()).child("steps").setValue(stepsData);
 
                     }
                 });
@@ -104,7 +122,7 @@ public class HomeFragment extends Fragment {
 
                 builder.show();
             }
-        });
+        });     //dialog box for entering steps
 
 
 

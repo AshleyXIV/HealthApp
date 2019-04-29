@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
         }
 
         //reference the database with the specific user's unique id
-        DatabaseReference databaseReference = firebaseDatabase.getReference(mAuth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(mAuth.getUid());
         //event listener for referencing the database
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
