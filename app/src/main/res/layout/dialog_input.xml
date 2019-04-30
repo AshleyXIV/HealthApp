@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText android:id="@+id/textViewInput"
+    android:layout_width="216dp"
+    android:layout_height="wrap_content"
+    android:padding="25dp"
+    android:background="@null"
+    android:hint="Input data here..."
+    android:inputType="number"
+    android:textColor="@color/colorPrimaryLight"
+    android:textSize="20sp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
