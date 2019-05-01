@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private TextView profileEmail, profileName, profileHeight, profileWeight, profileVerified;
     private Button profileUpdate, profileFriends;
@@ -49,6 +50,9 @@ public class ProfileFragment extends Fragment {
         profileVerified = view.findViewById(R.id.textViewVerified);
         profileUpdate = view.findViewById(R.id.buttonProfileUpdate);
         profileFriends = view.findViewById(R.id.buttonFriends);
+
+        profileUpdate.setOnClickListener(this);
+        profileFriends.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -98,5 +102,33 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    //OnClick Listener for Friends and Update Buttons
+    @Override
+    public void onClick(View view)
+    {
+        Fragment fragment = null;
+        switch(view.getId())
+        {
+            case R.id.buttonProfileUpdate:
+                fragment = new ProfileUpdateFragment();
+                replaceFragment(fragment);
+                break;
+
+            case R.id.buttonFriends:
+                fragment = new FriendsFragment();
+                replaceFragment(fragment);
+                break;
+        }
+    }
+
+    //Used to replace the ProfileFragment with either FriendsFragment or ProfileUpdateFragment
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
