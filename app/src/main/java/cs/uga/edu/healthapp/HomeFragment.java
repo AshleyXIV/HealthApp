@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     private Button btnBMI, btnSteps, btnCalories, btnWater, btnSleep;
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
+    long maxID = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
@@ -70,6 +71,9 @@ public class HomeFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {  //whenever there is a change in the database or when the app just starts
+                if(dataSnapshot.exists()){
+                    maxID = (dataSnapshot.getChildrenCount());
+                }
                 User user = dataSnapshot.getValue(User.class);  //retrieve all of the user's info from the database and place in user object
 
                 if (user != null) {
@@ -108,10 +112,25 @@ public class HomeFragment extends Fragment {
                         btnSteps.setText("Steps Walked: " + stepsInput);
 
                         Log.d(TAG, "onStepsClick: DATE = " + currentDate);
-                        Map<String, Map<String, String>> stepsData = new HashMap<String, Map<String, String>>();
-                        //stepsData.put("Date", currentDate, "Steps", stepsInput);
-
-                        myRef.child("users").child(mAuth.getUid()).child("steps").setValue(stepsData);
+                        //Map<String, Map<String, String>> stepsData = new HashMap<String, Map<String, String>>();
+                        //stepsData.put("date", new HashMap<String, String>());
+                        //stepsData.get("date").put("stepsWalked", stepsInput);
+                        //stepsData.put(currentDate, actualStepsData);
+                        Map<String, String> actualStepsData = new HashMap<String, String>();
+                        actualStepsData.put("date", currentDate);
+                        actualStepsData.put("stepsWalked", stepsInput);
+                        /*
+                        steps:  {
+                            { "date": "4/20/19", "stepsWalked": "1234" }
+                            { "date": "4/21/19", "stepsWalked": "2345" }
+                            { "date": "4/22/19", "stepsWalked": "3456" }
+                            ....
+                        }
+                         */
+                        //Log.d(TAG, "onStepsClick: Steps = " + stepsData);
+                        //myRef.child("users").child(mAuth.getUid()).child("steps").setValue(stepsData);
+                        //increment the entry for the data
+                        myRef.child("users").child(mAuth.getUid()).child("steps").child(String.valueOf(maxID + 1)).setValue(actualStepsData);
 
                     }
                 });
