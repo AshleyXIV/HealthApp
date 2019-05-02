@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     package="cs.uga.edu.healthapp">
 
     <application
@@ -9,7 +10,7 @@
         android:roundIcon="@mipmap/health_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity" android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".MainActivity"
