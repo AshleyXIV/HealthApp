@@ -26,8 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
-
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private TextView profileEmail, profileName, profileHeight, profileWeight, profileVerified;
@@ -49,7 +47,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         profileWeight = view.findViewById(R.id.textViewWeight);
         profileVerified = view.findViewById(R.id.textViewVerified);
         profileUpdate = view.findViewById(R.id.buttonProfileUpdate);
-        profileFriends = view.findViewById(R.id.buttonFriends);
+        profileFriends = view.findViewById(R.id.buttonTrends);
 
         profileUpdate.setOnClickListener(this);
         profileFriends.setOnClickListener(this);
@@ -117,7 +115,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 replaceFragment(fragment);
                 break;
 
-            case R.id.buttonFriends:
+            case R.id.buttonTrends:
                 fragment = new FriendsFragment();
                 replaceFragment(fragment);
                 break;

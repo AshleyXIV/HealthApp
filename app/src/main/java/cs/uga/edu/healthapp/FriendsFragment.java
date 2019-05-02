@@ -14,7 +14,10 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,37 +36,44 @@ import java.util.List;
 
 public class FriendsFragment extends Fragment
 {
-    private RecyclerView recyclerView;
-    private FriendsAdapter friendsAdapter;
-    private List<User> mUsers;
+    private ListView listView;
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    private ArrayList<String> mUsers;
+    ArrayAdapter<String> adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        mUsers = new ArrayList<>();
-
-        readUsers();
-
-        return view;
-    }
-
-    private void readUsers()
-    {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
-        reference.addValueEventListener(new ValueEventListener()
+        listView = view.findViewById(R.id.listView);
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("users");
+        mUsers = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.friends_item, R.id.username, mUsers);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String username = adapter.getItem(position);
+
+                Fragment fragment = new FriendProfileFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                fragment.setArguments(bundle);
+
+                getFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+            }
+        });
+
+        ref.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                mUsers.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     User user = snapshot.getValue(User.class);
@@ -72,13 +82,12 @@ public class FriendsFragment extends Fragment
                     assert firebaseUser != null;
                     if(!user.getEmail().equals(firebaseUser.getEmail()))
                     {
-                        mUsers.add(user);
+                        mUsers.add(user.getName());
 
                     }
                 }
 
-                friendsAdapter = new FriendsAdapter(getContext(), mUsers);
-                recyclerView.setAdapter(friendsAdapter);
+                listView.setAdapter(adapter);
             }
 
             @Override
@@ -87,6 +96,8 @@ public class FriendsFragment extends Fragment
 
             }
         });
+
+        return view;
     }
 
 }
