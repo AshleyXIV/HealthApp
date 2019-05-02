@@ -261,7 +261,8 @@ public class FriendsTrendFragment extends Fragment
                     Iterable<DataSnapshot> waterDS = water1.getChildren();
                     for (DataSnapshot waterChildren : waterDS)
                     {
-                        String waterString = waterChildren.child("cupsDrank").getValue().toString();
+                        String waterString = waterChildren.getValue().toString();
+                        waterString = waterString.substring(waterString.indexOf('=')+1, waterString.length()-1);
                         int water = Integer.parseInt(waterString);
                         WaterArray.add(new Entry(i, water));
                         i++;
