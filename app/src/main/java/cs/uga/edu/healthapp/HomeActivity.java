@@ -18,6 +18,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    /**
+     * initializes UI components and firebase and transitions to the homeFragment on creation
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +38,21 @@ public class HomeActivity extends AppCompatActivity {
                 new HomeFragment()).commit();
     }
 
+    /**
+     * Check if user is signed in (non-null) and update UI accordingly (go back to login activity if user is not signed in)
+     */
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         if (mAuth.getCurrentUser() == null) { //if user is NOT logged in
             finish();   //finish current activity
             startActivity(new Intent(this, MainActivity.class));    //go to login activity if not logged in
         }
     }
 
+    /**
+     * listener for the bottom navigation bar; changes to a different fragment depending on what item is selected
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -69,6 +78,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
             };
 
+    /**
+     * inflate the top menu bar to the toolbar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -77,6 +91,11 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * if the menu item (logout) is selected, logout and go back to the login activity
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

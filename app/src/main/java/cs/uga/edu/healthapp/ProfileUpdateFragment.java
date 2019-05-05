@@ -26,7 +26,13 @@ public class ProfileUpdateFragment extends Fragment implements View.OnClickListe
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
-
+    /**
+     * Updates Profile of currently logged in user from user input.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Nullable
     @Override
@@ -49,6 +55,10 @@ public class ProfileUpdateFragment extends Fragment implements View.OnClickListe
         return view;
     }
 
+    /**
+     * Updates user's name, weight, and height. Will not update a certain field if that field is empty.
+     * @param v
+     */
     @Override
     public void onClick(View v)
     {
@@ -82,7 +92,9 @@ public class ProfileUpdateFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    //Used to replace the ProfileFragment with either FriendsFragment or ProfileUpdateFragment
+    /**
+     * Used to replace the ProfileFragment with either FriendsFragment or ProfileUpdateFragment
+     */
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, someFragment);

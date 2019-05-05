@@ -42,6 +42,15 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
+    /**
+     * initialize UI components and firebase components
+     * calculate BMI
+     * create dialog boxes for each health item and enter the input into the firebase database accordingly
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
@@ -276,6 +285,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * take the height and weight and calculate the BMI
+     * @param height
+     * @param weight
+     * @return
+     */
     public String calculateBMI(String height, String weight){
         double doubleHeight = Integer.parseInt(height);
         double doubleWeight = Integer.parseInt(weight);
@@ -289,6 +304,11 @@ public class HomeFragment extends Fragment {
         return BMI;
     }
 
+    /**
+     * take the BMI number and return the corresponding weight status
+     * @param BMI
+     * @return
+     */
     public String calcWeightStatus(String BMI){
         double doubleBMI = Double.parseDouble(BMI);
         String weightStatus = "";

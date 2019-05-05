@@ -1,5 +1,8 @@
 package cs.uga.edu.healthapp;
 
+/**
+ * User class with constructors and getters and setters for email, name, height, and weight
+ */
 public class User {
     public String email, name, height, weight;
 

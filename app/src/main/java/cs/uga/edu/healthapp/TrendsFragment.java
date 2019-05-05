@@ -32,6 +32,13 @@ public class TrendsFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
+    /**
+     * Shows Trends View. Pulls all health data from user and displays it in four line charts.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +64,11 @@ public class TrendsFragment extends Fragment {
         //DatabaseReference refSteps = referenceSteps.child("steps");
 
         referenceSteps.addValueEventListener(new ValueEventListener() {
+            /**
+             * Pulls steps data from currently logged in user and adds it to the data array.
+             * Data array then is used to populate the steps line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -120,11 +132,6 @@ public class TrendsFragment extends Fragment {
         });
 
 
-
-
-
-
-
         //Calories Consumed Chart
         calChart = (LineChart) view.findViewById(R.id.calChart);
 
@@ -139,6 +146,11 @@ public class TrendsFragment extends Fragment {
         DatabaseReference referenceCals = firebaseDatabase.getReference().child("users").child(mAuth.getUid()).child("calories");
 
         referenceCals.addValueEventListener(new ValueEventListener() {
+            /**
+             * Pulls Calories data from currently logged in user and adds it to the data array.
+             * Data array then is used to populate the calories line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -200,13 +212,6 @@ public class TrendsFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
-
         //Cups of Water Chart
         waterChart = (LineChart) view.findViewById(R.id.waterChart);
 
@@ -222,6 +227,11 @@ public class TrendsFragment extends Fragment {
         DatabaseReference referenceWater = firebaseDatabase.getReference().child("users").child(mAuth.getUid()).child("water");
 
         referenceWater.addValueEventListener(new ValueEventListener() {
+            /**
+             * Pulls water data from currently logged in user and adds it to the data array.
+             * Data array then is used to populate the water line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -284,12 +294,6 @@ public class TrendsFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
         //Hours Slept Chart
         sleepChart = (LineChart) view.findViewById(R.id.sleepChart);
 
@@ -305,6 +309,11 @@ public class TrendsFragment extends Fragment {
         DatabaseReference referenceSleep = firebaseDatabase.getReference().child("users").child(mAuth.getUid()).child("sleep");
 
         referenceSleep.addValueEventListener(new ValueEventListener() {
+            /**
+             * Pulls sleep data from currently logged in user and adds it to the data array.
+             * Data array then is used to populate the sleep line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {

@@ -42,6 +42,13 @@ public class FriendsFragment extends Fragment
     private ArrayList<String> mUsers;
     ArrayAdapter<String> adapter;
 
+    /**
+     * Lists all friends currently registered to firebase.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
@@ -56,6 +63,14 @@ public class FriendsFragment extends Fragment
         adapter = new ArrayAdapter<String>(getContext(), R.layout.friends_item, R.id.username, mUsers);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Replaces current fragment with the Friend Profile fragment.
+             * Sends username of selected fragment to Friend Profile.
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String username = adapter.getItem(position);
@@ -71,6 +86,10 @@ public class FriendsFragment extends Fragment
 
         ref.addValueEventListener(new ValueEventListener()
         {
+            /**
+             * Creates list of friends on listView.
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {

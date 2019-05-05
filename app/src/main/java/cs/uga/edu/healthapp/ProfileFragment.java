@@ -35,6 +35,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
+    /**
+     * initialize UI components and firebase components
+     * option to send user verification email and display verification status
+     * display the user's profile information
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Nullable
     @Override
@@ -104,7 +113,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    //OnClick Listener for Friends and Update Buttons
+    /**
+     * OnClick Listener for Friends and Update Buttons
+     */
     @Override
     public void onClick(View view)
     {
@@ -123,7 +134,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    //Used to replace the ProfileFragment with either FriendsFragment or ProfileUpdateFragment
+    /**
+     * Used to replace the ProfileFragment with either FriendsFragment or ProfileUpdateFragment
+     */
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, someFragment);

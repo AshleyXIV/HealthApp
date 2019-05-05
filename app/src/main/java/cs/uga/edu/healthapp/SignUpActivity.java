@@ -33,6 +33,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     String email, password, name, height, weight;
 
+    /**
+     * initialize UI components and firebase components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * onClick listener for buttons
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -75,6 +83,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }   //onClick
 
+    /**
+     * error checking for fields on signup
+     * if the user enters valid items, create an account and prompt the user to sign in from the login page
+     */
     private void registerUser() {
         email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();

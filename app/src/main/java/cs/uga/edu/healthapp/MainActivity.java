@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressBar progressBar;
     FirebaseAuth mAuth;
 
+    /**
+     * initialize UI components, firebase components and set button click listeners
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +45,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.buttonLogin).setOnClickListener(this);
     }   //onCreate
 
+    /**
+     * check if user is signed in (non-null) and update UI accordingly (login if still signed in)
+     */
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         if(mAuth.getCurrentUser() != null){ //if user is already logged in
             finish();   //finish current activity
             startActivity(new Intent(this, HomeActivity.class));    //go to home if logged in
         }
     }
 
+    /**
+     * button click listener for the buttons
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -64,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }   //onClick
 
+    /**
+     * error check to see if the fields are entered correctly
+     * if login credentials are valid, open the user's home screen
+     * else, display the error message
+     */
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
