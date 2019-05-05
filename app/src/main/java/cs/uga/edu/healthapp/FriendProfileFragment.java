@@ -26,6 +26,15 @@ public class FriendProfileFragment extends Fragment implements View.OnClickListe
     private FirebaseDatabase firebaseDatabase;
     String user;
 
+    /**
+     * Shows Friend Profile view. Uses username given by the bundle from the previous fragment to pull
+     * the specified user's profile data and display it. Also allows the user to view the friend's
+     * health data using the trends button.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
@@ -50,6 +59,10 @@ public class FriendProfileFragment extends Fragment implements View.OnClickListe
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
         reference.orderByChild("name").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * Pulls friend data from database and displays it on the profile view.
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -80,6 +93,12 @@ public class FriendProfileFragment extends Fragment implements View.OnClickListe
         return view;
     }
 
+    /**
+     * Lets currently logged in user view a selected friend's health data.
+     * Pushes friend's username in a bundle so the new fragment can search and pull the required
+     * data.
+     * @param v
+     */
     @Override
     public void onClick(View v)
     {

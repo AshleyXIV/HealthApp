@@ -34,6 +34,13 @@ public class FriendsTrendFragment extends Fragment
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
 
+    /**
+     * shows Trends View. Pulls all health data from specified Friend and displays it in four line charts.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_friends_trends, container, false);
@@ -64,6 +71,11 @@ public class FriendsTrendFragment extends Fragment
 
         referenceSteps.orderByChild("name").equalTo(username).addValueEventListener(new ValueEventListener()
         {
+            /**
+             * Pulls steps data from the specific Friend and adds it to the data array.
+             * Data array then is used to populate the steps line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -158,6 +170,11 @@ public class FriendsTrendFragment extends Fragment
 
         referenceCals.orderByChild("name").equalTo(username).addValueEventListener(new ValueEventListener()
         {
+            /**
+             * Pulls calories data from the specific Friend and adds it to the data array.
+             * Data array then is used to populate the calories line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -249,6 +266,11 @@ public class FriendsTrendFragment extends Fragment
 
         referenceWater.orderByChild("name").equalTo(username).addValueEventListener(new ValueEventListener()
         {
+            /**
+             * Pulls water data from the specific Friend and adds it to the data array.
+             * Data array then is used to populate the water line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -343,6 +365,11 @@ public class FriendsTrendFragment extends Fragment
 
         referenceSleep.orderByChild("name").equalTo(username).addValueEventListener(new ValueEventListener()
         {
+            /**
+             * Pulls sleep data from the specific Friend and adds it to the data array.
+             * Data array then is used to populate the sleep line chart.
+             * Chart is formatted to adhere to the app's design.
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
